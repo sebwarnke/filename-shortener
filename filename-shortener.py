@@ -4,7 +4,7 @@ import argparse
 import hashlib
 
 
-def process_directory(directory, regex):
+def process_directory(directory):
     filename_array = os.listdir(directory)
 
     for filename in filename_array:
@@ -18,13 +18,13 @@ def process_directory(directory, regex):
             month = match.group(4)
             year = match.group(5)[2:]
             extension = match.group(6)
-            hashed_clutter = hashlib.sha1(clutter).hexdigest()[:8]
+            hashed_clutter = hashlib.sha1(clutter.encode('utf-8')).hexdigest()[:8]
             new_filename = year + month + day + '-' + prefix + '_' + hashed_clutter + extension
 
-            print 'Renaming: [' + filename + '] => [' + new_filename + ']'
+            print ('Renaming: [' + filename + '] => [' + new_filename + ']')
             os.rename(directory + '/' + filename, directory + '/' + new_filename)
         else:
-            print 'Keeping [' + filename + ']'
+            print ('Keeping [' + filename + ']')
 
 
 def main():
@@ -32,7 +32,7 @@ def main():
     parser.add_argument("directory")
     args = parser.parse_args()
 
-    process_directory(args.directory, args.regex)
+    process_directory(args.directory)
 
 
 main()
