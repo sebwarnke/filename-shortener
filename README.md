@@ -6,7 +6,7 @@ This Python script shortens file names in a given directory.
 python filename-shortener.py <directory>
 ```
 
-## What is does
+## What it does
 It expects the following files to be shortened;
 ```
 Foo_Bar.Baz_10.09.19868475.pdf
